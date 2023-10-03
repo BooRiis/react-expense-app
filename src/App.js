@@ -28,14 +28,14 @@ function App() {
 
   const [expenses, setExpenses] = useState(initialExpenses);
 
-  const addExpenseHandler = (newExpense) => {
-    setExpenses((prevExpenses) => [newExpense, ...prevExpenses])
-  }
+  const addExpenseHandler = newExpense => {
+    setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
+  };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses}/>
+      <Expenses items={expenses} />
     </div>
   );
 }
