@@ -6,7 +6,9 @@ function ExpenseForm(props) {
         enteredTitle: "",
         enteredAmount: "",
         enteredDate: "",
-    })
+    });
+
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     const titleChangeHandler = (event) => {
         setUserInput((prevState) => {
@@ -31,7 +33,7 @@ function ExpenseForm(props) {
         
         const expenseData = {
             title: userInput.enteredTitle,
-            amount: userInput.enteredAmount,
+            amount: +userInput.enteredAmount,
             date: new Date(userInput.enteredDate),
         }
        
@@ -42,9 +44,24 @@ function ExpenseForm(props) {
             enteredAmount: "",
             enteredDate: "",
         })
+
+        setIsFormVisible(false);
     }
 
+    const showFormHandler = () => {
+        setIsFormVisible(true);
+      };
+    
+      const cancelFormHandler = () => {
+        setIsFormVisible(false);
+      };
+
     return (
+        <div>
+        {!isFormVisible && (
+        <button onClick={showFormHandler}>Create Expense</button>
+      )}
+      {isFormVisible && (
         <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
                 <div className="new-expense__control">
@@ -61,9 +78,14 @@ function ExpenseForm(props) {
                 </div>
             </div>
             <div className="new-expense__actions">
+                <button type="button" onClick={cancelFormHandler}>
+              Cancel
+            </button>
                 <button type="submit">Add Expense</button>
             </div>
         </form>
+      )}
+        </div>
     )
 }
 
